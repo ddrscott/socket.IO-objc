@@ -70,6 +70,9 @@ static NSString* kSecureSocketPortURL = @"wss://%@:%d/socket.io/1/websocket/%@";
     
     _webSocket = [[SRWebSocket alloc] initWithURL:url];
     _webSocket.delegate = self;
+    
+    DEBUGLOG(@"Setting DispatchQueue to DISPATCH_QUEUE_PRIORITY_BACKGROUND");
+    [_webSocket setDelegateDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
     DEBUGLOG(@"Opening %@", url);
     [_webSocket open];
 }

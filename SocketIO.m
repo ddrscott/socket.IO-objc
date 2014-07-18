@@ -417,6 +417,9 @@ NSString* const SocketIOException = @"SocketIOException";
 
 - (void) setTimeout 
 {
+    // Not neccesary assuming remote server is operational
+    return;
+    
     DEBUGLOG(@"start/reset timeout");
     if (_timeout) {
         dispatch_source_cancel(_timeout);
@@ -438,9 +441,8 @@ NSString* const SocketIOException = @"SocketIOException";
     dispatch_source_set_event_handler(_timeout, ^{
         [weakSelf onTimeout];
     });
-    
+
     dispatch_resume(_timeout);
-    
 }
 
 
